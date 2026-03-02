@@ -1,2 +1,3 @@
-# repo_zajeciowe
-Informatyka ogólna 3 - Tomasz Bieńkowski
+Tomasz Bieńkowski
+275508
+Programowanie w języku Python
