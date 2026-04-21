@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dodaj nowe zwierzę</h1>
+
+{% if error %}
+    <p class="error-message">{{ error }}</p>
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data">
+
+    <label>Nazwa:</label>
+    <input type="text" name="name" required>
+
+    <br><br>
+
+    <label>Kategoria:</label>
+    <select name="category" required>
+        {% for category in categories %}
+            <option value="{{ category }}">
+                {{ category|capitalize }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Masa:</label>
+    <select name="weight" required>
+        {% for weight in weights %}
+            <option value="{{ weight }}">
+                {{ weight }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Rozmiar:</label>
+    <select name="size" required>
+        {% for size in sizes %}
+            <option value="{{ size }}">
+                {{ size }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Habitat:</label><br>
+
+    <div class="checkbox-grid">
+        {% for habitat in habitats %}
+            <label>
+                <input
+                    type="checkbox"
+                    name="habitats"
+                    value="{{ habitat }}"
+                >
+                {{ habitat }}
+            </label>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <label>Zdjęcie:</label>
+    <input
+        type="file"
+        name="image"
+        accept=".jpg,.jpeg,.png"
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Dodaj zwierzę
+    </button>
+</form>
+{% endblock %}

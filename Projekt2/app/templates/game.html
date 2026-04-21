@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Zgadnij zwierzę</h1>
+
+    <div class="attempt-grid">
+        {% for attempt in attempts %}
+            <div class="attempt-card">
+                <h3>{{ attempt.name }}</h3>
+
+                <div class="guess-row">
+                    <span>Nazwa</span>
+                    <span class="guess-value">{{ attempt.name }}</span>
+                </div>
+
+                <div class="guess-row">
+                    <span>Kategoria</span>
+                    <span class="{{ attempt.category_class }}">
+                        {{ attempt.category }}
+                    </span>
+                </div>
+
+                <div class="guess-row">
+                    <span>Habitat</span>
+                    <span class="{{ attempt.habitat_class }}">
+                        {{ attempt.habitat }}
+                    </span>
+                </div>
+
+                <div class="guess-row">
+                    <span>Masa</span>
+                    <span class="{{ attempt.weight_class }}">
+                        {{ attempt.weight }}
+                    </span>
+                </div>
+
+                <div class="guess-row">
+                    <span>Rozmiar</span>
+                    <span class="{{ attempt.size_class }}">
+                        {{ attempt.size }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+<form method="POST">
+    <input type="text" name="guess" placeholder="Podaj nazwę">
+    <button type="submit">Zgadnij</button>
+</form>
+
+{% if hint and hint.error %}
+    <p class="error-message">{{ hint.error }}</p>
+{% endif %}
+
+<!--{% if hint %}-->
+<!--    <h3>Podpowiedzi:</h3>-->
+
+<!--    <p>-->
+<!--        Gromada:-->
+<!--        {% if hint.category %}-->
+<!--            zgadza się-->
+<!--        {% else %}-->
+<!--            nie zgadza się-->
+<!--        {% endif %}-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--        Miejsce:-->
+<!--        {% if hint.habitat %}-->
+<!--            zgadza się-->
+<!--        {% else %}-->
+<!--            nie zgadza się-->
+<!--        {% endif %}-->
+<!--    </p>-->
+
+<!--    <p>Masa: {{ hint.weight }}</p>-->
+<!--    <p>Rozmiar: {{ hint.size }}</p>-->
+<!--{% endif %}-->
+
+<!--{% if session["attempts"] %}-->
+<!--    <h2>Historia prób</h2>-->
+
+<!--    <div class="attempt-grid">-->
+<!--        {% for attempt in attempts %}-->
+<!--            <div class="attempt-card">-->
+<!--                <h3>{{ attempt.name }}</h3>-->
+
+<!--                <div class="guess-row">-->
+<!--                    <span>Nazwa</span>-->
+<!--                    <span class="guess-value">{{ attempt.name }}</span>-->
+<!--                </div>-->
+
+<!--                <div class="guess-row">-->
+<!--                    <span>Kategoria</span>-->
+<!--                    <span class="{{ attempt.category_class }}">-->
+<!--                        {{ attempt.category }}-->
+<!--                    </span>-->
+<!--                </div>-->
+
+<!--                <div class="guess-row">-->
+<!--                    <span>Habitat</span>-->
+<!--                    <span class="{{ attempt.habitat_class }}">-->
+<!--                        {{ attempt.habitat }}-->
+<!--                    </span>-->
+<!--                </div>-->
+
+<!--                <div class="guess-row">-->
+<!--                    <span>Masa</span>-->
+<!--                    <span class="{{ attempt.weight_class }}">-->
+<!--                        {{ attempt.weight }}-->
+<!--                    </span>-->
+<!--                </div>-->
+
+<!--                <div class="guess-row">-->
+<!--                    <span>Rozmiar</span>-->
+<!--                    <span class="{{ attempt.size_class }}">-->
+<!--                        {{ attempt.size }}-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+<!--{% endif %}-->
+
+<!--{% endblock %}-->

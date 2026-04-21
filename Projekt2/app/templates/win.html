@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Gratulacje!</h1>
+<p>Odgadłeś zwierzę: {{ animal.name }}</p>
+
+<img
+    src="{{ url_for('static', filename='images/' + animal.image_filename) }}"
+    width="300"
+>
+<br>
+<a href="/game">Zagraj ponownie</a>
+{% endblock %}

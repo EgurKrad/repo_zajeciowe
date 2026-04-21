@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>404 - Strona nie istnieje</h1>
+    <p>Ups, wygląda na to, że taka strona nie została znaleziona.</p>
+
+    <a href="{{ url_for('main.index') }}">
+        Wróć na stronę główną
+    </a>
+{% endblock %}

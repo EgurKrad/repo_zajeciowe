@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edytuj zwierzę</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <label>Nazwa:</label>
+    <input
+        type="text"
+        name="name"
+        value="{{ animal.name }}"
+        required
+    >
+
+    <label>Kategoria:</label>
+    <select name="category" required>
+        {% for category in categories %}
+            <option
+                value="{{ category }}"
+                {% if animal.category == category %}selected{% endif %}
+            >
+                {{ category }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Masa:</label>
+    <select name="weight" required>
+        {% for weight in weights %}
+            <option
+                value="{{ weight }}"
+                {% if animal.weight == weight %}selected{% endif %}
+            >
+                {{ weight }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Rozmiar:</label>
+    <select name="size" required>
+        {% for size in sizes %}
+            <option
+                value="{{ size }}"
+                {% if animal.size == size %}selected{% endif %}
+            >
+                {{ size }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label>Habitat:</label>
+    <br>
+
+    {% set selected_habitats = animal.habitats.split(",") %}
+
+    <div class="checkbox-grid">
+        {% for habitat in habitats %}
+            <label>
+                <input
+                    type="checkbox"
+                    name="habitats"
+                    value="{{ habitat }}"
+                    {% if habitat in selected_habitats %}checked{% endif %}
+                >
+                {{ habitat }}
+            </label>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <label>Aktualne zdjęcie:</label>
+    <br>
+    <img
+        src="{{ url_for('static', filename='images/' + animal.image_filename) }}"
+        width="200"
+    >
+
+    <br><br>
+
+    <label>Zmień zdjęcie:</label>
+    <input
+        type="file"
+        name="image"
+        accept=".jpg,.jpeg,.png"
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Zapisz zmiany
+    </button>
+</form>
+{% endblock %}

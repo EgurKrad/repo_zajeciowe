@@ -1,0 +1,1 @@
+Prosta gra inspirowana Wordlem, gdzie zgadujemy nazwy zwierząt.
