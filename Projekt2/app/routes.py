@@ -234,22 +234,27 @@ def game():
                 attempt = {
                     "name": guessed.name,
 
-                    "category": (
-                        "✓" if hint["category"] else "✗"
-                    ),
+                    # wartości zgadywanego zwierzęcia
+                    "guessed_category": guessed.category,
+                    "guessed_habitats": guessed.habitats,
+                    "guessed_weight": guessed.weight,
+                    "guessed_size": guessed.size,
+
+                    # status zgodności
+                    "category_status": "✓" if hint["category"] else "✗",
                     "category_class": (
                         "status-correct"
                         if hint["category"]
                         else "status-wrong"
                     ),
 
-                    "habitat": hint["habitat"],
+                    "habitat_status": hint["habitat"],
                     "habitat_class": get_status_class(hint["habitat"]),
 
-                    "weight": hint["weight"],
+                    "weight_status": hint["weight"],
                     "weight_class": get_status_class(hint["weight"]),
 
-                    "size": hint["size"],
+                    "size_status": hint["size"],
                     "size_class": get_status_class(hint["size"])
                 }
 
