@@ -9,7 +9,7 @@
             <h3>{{ attempt.name }}</h3>
 
             <div class="guess-row">
-                <span>Kategoria</span>
+                <span>Kategoria:</span>
                 <span>
                     {{ attempt.guessed_category }}
                     <span class="{{ attempt.category_class }}">
@@ -19,9 +19,9 @@
             </div>
 
             <div class="guess-row">
-                <span>Habitat</span>
+                <span>Habitat: </span>
                 <span>
-                    {{ attempt.guessed_habitats }}
+                    {{ attempt.guessed_habitats.replace(",", ", ") }}
                     <span class="{{ attempt.habitat_class }}">
                         {{ attempt.habitat_status }}
                     </span>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="guess-row">
-                <span>Masa</span>
+                <span>Masa:</span>
                 <span>
                     {{ attempt.guessed_weight }}
                     <span class="{{ attempt.weight_class }}">
@@ -39,7 +39,7 @@
             </div>
 
             <div class="guess-row">
-                <span>Rozmiar</span>
+                <span>Rozmiar:</span>
                 <span>
                     {{ attempt.guessed_size }}
                     <span class="{{ attempt.size_class }}">
