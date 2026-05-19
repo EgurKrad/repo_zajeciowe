@@ -30,7 +30,7 @@ number of major vessels (0-3) colored by flourosopy
 
 thal: 0 = normal; 1 = fixed defect; 2 = reversable defect
 
-target: 0 = normall; 1 = ill
+target: 0 = normal; 1 = ill
 
 
 
