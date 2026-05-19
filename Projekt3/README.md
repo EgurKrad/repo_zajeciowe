@@ -21,9 +21,23 @@ target: 0 = normall; 1 = ill
 Etapy:
 
 I Preprocessing:
-src/preprocessing:
+src/preprocessing.py
 Usunięcie duplikatów (około 700)
 Podział na cechy i etykiety
 Podział trening 80% / test 20%
 Imputacja danych (nie potrzebna bo nie ma NULLi, ale dana dla przykładu)
 Skalowanie danych, istotne dla Logistic Regression, KNN, SVM, Neural Network
+
+II EDA (Exploratory Data Analysis):
+src/eda.py
+Wyświetla informacje o danych wstępnych, mediana, średnia itp.
+
+III Strojenie hiperparametrów:
+src/tuning.py
+GridSearchCV do sprawdzenia jaka kombinacja parametrów daje najlepsze wyniki dla każdego modelu na danych treningowych
+Logistic Regression - C (regularyzacja modelu)
+KNN - liczba sąsiadów i sposób głosowania
+Decision Tree - maksymalna głębokość drzewa i minimalna liczba próbek do podziału
+Random Forest - maksymalna głębokość drzewa, minimalna liczba próbek do podziału i ilość drzew
+SVM - C i jądro
+Neural Network - architektura sieci, funkcja aktywacji i learning rate
