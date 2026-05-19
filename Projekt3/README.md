@@ -151,6 +151,8 @@ VIII Wyniki:
 
 Program wyświetla informacje o modelach, ich metrykach skuteczności oraz najlepszym modelu.
 
+src/visualization.py
+
 Oprócz tego zapisuje:
 results/
 zawierające:
