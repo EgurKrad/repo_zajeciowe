@@ -1,5 +1,6 @@
 Program do znajdywania najlepszego modelu do przewidywania chorób serca.
 Dataset: https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset/data
+
 14 kolumn:
 age
 sex
@@ -15,3 +16,14 @@ the slope of the peak exercise ST segment
 number of major vessels (0-3) colored by flourosopy
 thal: 0 = normal; 1 = fixed defect; 2 = reversable defect
 target: 0 = normall; 1 = ill
+
+
+Etapy:
+
+I Preprocessing:
+src/preprocessing:
+Usunięcie duplikatów (około 700)
+Podział na cechy i etykiety
+Podział trening 80% / test 20%
+Imputacja danych (nie potrzebna bo nie ma NULLi, ale dana dla przykładu)
+Skalowanie danych, istotne dla Logistic Regression, KNN, SVM, Neural Network
