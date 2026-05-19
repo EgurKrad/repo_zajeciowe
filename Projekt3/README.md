@@ -41,3 +41,20 @@ Decision Tree - maksymalna głębokość drzewa i minimalna liczba próbek do po
 Random Forest - maksymalna głębokość drzewa, minimalna liczba próbek do podziału i ilość drzew
 SVM - C i jądro
 Neural Network - architektura sieci, funkcja aktywacji i learning rate
+
+IV Trenowanie modeli:
+main.py
+Dla każdego dostrojonego modelu dajemy model.fit z danymi treningowymi
+
+V Ewaluacja:
+src/evaluation.py
+Accuracy
+Precision
+Recall
+F1-score
+Log Loss
+Confusion Matrix:
+TN FP
+FN TP
+
+VI
