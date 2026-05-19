@@ -36,7 +36,10 @@ target: 0 = normall; 1 = ill
 
 Etapy:
 
+
 I Preprocessing:
+
+
 
 src/preprocessing.py
 
@@ -51,13 +54,20 @@ Imputacja danych (nie potrzebna bo nie ma NULLi, ale dana dla przykładu)
 Skalowanie danych, istotne dla Logistic Regression, KNN, SVM, Neural Network
 
 
+
 II EDA (Exploratory Data Analysis):
+
+
 
 src/eda.py
 
 Wyświetla informacje o danych wstępnych, mediana, średnia itp.
 
+
+
 III Strojenie hiperparametrów:
+
+
 
 src/tuning.py
 
@@ -76,13 +86,21 @@ SVM - C i jądro
 Neural Network - architektura sieci, funkcja aktywacji i learning rate
 
 
+
+
 IV Trenowanie modeli:
+
+
 
 main.py
 
 Dla każdego dostrojonego modelu dajemy model.fit z danymi treningowymi
 
+
+
 V Ewaluacja:
+
+
 
 src/evaluation.py
 
@@ -102,13 +120,21 @@ TN FP
 
 FN TP
 
+
+
 VI Feature Importance:
+
+
 
 src/feature_importance.py
 
 Tylko dla Decision Tree i Random Forest, sprawdzamy które cechy mają największy wpływ na prawdopodobieństwo wystąpienia choroby
 
+
+
 VII Wybór najlepszego modelu:
+
+
 
 main.py
 
@@ -117,7 +143,11 @@ score = 0.5 * recall + 0.3 * f1 + 0.2 * accuracy - 0.1 * loss
 
 Zwracamy ranking modeli, od najlepszego do najgorszego.
 
+
+
 VIII Wyniki:
+
+
 
 Program wyświetla informacje o modelach, ich metrykach skuteczności oraz najlepszym modelu.
 
