@@ -57,4 +57,31 @@ Confusion Matrix:
 TN FP
 FN TP
 
-VI
+VI Feature Importance:
+src/feature_importance.py
+Tylko dla Decision Tree i Random Forest, sprawdzamy które cechy mają największy wpływ na prawdopodobieństwo wystąpienia choroby
+
+VII Wybór najlepszego modelu:
+main.py
+Obliczamy punkty dla każdego modelu schematem:
+score = 0.5 * recall + 0.3 * f1 + 0.2 * accuracy - 0.1 * loss
+Zwracamy ranking modeli, od najlepszego do najgorszego.
+
+VIII Wyniki:
+Program wyświetla informacje o modelach, ich metrykach skuteczności oraz najlepszym modelu.
+
+Oprócz tego zapisuje:
+results/
+zawierające:
+metrics.csv
+ranking modeli.
+confusion_matrices/
+macierze błędów.
+learning_curves/
+krzywe uczenia.
+feature_importance/
+ważność cech.
+eda/
+wykresy eksploracyjne.
+best_model.pkl
+najlepszy model.
