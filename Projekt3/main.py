@@ -4,10 +4,6 @@ from src.preprocessing import (
     load_and_preprocess_data
 )
 
-from src.models import (
-    get_models
-)
-
 from src.evaluation import (
     evaluate_model,
     save_metrics
@@ -27,6 +23,8 @@ from src.tuning import (
 from src.feature_importance import (
     plot_feature_importance
 )
+
+from src.scoring import calculate_combined_score
 
 import joblib
 def create_folders():
@@ -86,10 +84,7 @@ def main():
 
         metrics["model"] = name
         metrics["combined_score"] = (
-                0.5 * metrics["recall"]
-                + 0.3 * metrics["f1"]
-                + 0.2 * metrics["accuracy"]
-                - 0.1 * metrics["loss"]
+            calculate_combined_score(metrics)
         )
         if metrics["combined_score"] > best_score:
             best_score = metrics["combined_score"]

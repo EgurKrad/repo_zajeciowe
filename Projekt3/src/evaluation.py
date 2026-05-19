@@ -10,7 +10,7 @@ from sklearn.metrics import (
     roc_auc_score
 )
 
-
+from src.scoring import calculate_combined_score
 def evaluate_model(model, X_test, y_test):
     predictions = model.predict(X_test)
     probabilities = model.predict_proba(X_test)
@@ -52,11 +52,9 @@ def evaluate_model(model, X_test, y_test):
 def save_metrics(results):
     df = pd.DataFrame(results)
 
-    df["combined_score"] = (
-            0.5 * df["recall"]
-            + 0.3 * df["f1"]
-            + 0.2 * df["accuracy"]
-            - 0.1 * df["loss"]
+    df["combined_score"] = df.apply(
+        calculate_combined_score,
+        axis=1
     )
 
     df = df.sort_values(
