@@ -42,3 +42,12 @@ oraz logowania; -> Jest
 
 ● Inne zaawansowane opcje. -> dzięki fuzzy search nie muszę dać dokładnie nazwy zwierzęcia: przykładowo "czarn wdowy" zostanie zaakceptowany
 jako "czarna wdowa".
+
+
+
+W ramach projektu nr. 4:
+
+Gdy dodaję/edytuję zwierze, jeśli nie jest podane zdjęcie, automatycznie bierze zdjęcie ze strony [unsplash.com](https://unsplash.com/)
+Jeśli nie ma zdjęcia pasującego do zwierzęcia, wtedy dany jest placeholder.
+
+Dodatkowo doszlifowana logika dodawania/edycji zwierząt, wraz z błędami np. przy dodawaniu już występujących w bazie zwierząt.
