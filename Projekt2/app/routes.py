@@ -13,6 +13,9 @@ from functools import wraps
 from flask import abort
 import unicodedata
 from rapidfuzz import process, fuzz
+import requests
+import time
+from urllib.parse import quote
 
 main = Blueprint("main", __name__)
 
@@ -146,6 +149,61 @@ def get_status_class(value):
         return "status-partial"
 
     return "status-wrong"
+
+
+# Pobieranie obrazka z Unsplash
+def download_animal_image(animal_name):
+    import os
+    headers = {
+        "Accept-Version": "v1",
+        "Authorization": f"Client-ID {os.getenv('UNSPLASH_ACCESS_KEY')}"
+    }
+
+    access_key = os.getenv("UNSPLASH_ACCESS_KEY")
+    if not access_key:
+        print("UNSPLASH_ACCESS_KEY missing")
+        return "placeholder.png"
+
+    try:
+        response = requests.get(
+            "https://api.unsplash.com/search/photos",
+            headers=headers,
+            params={"query": animal_name, "per_page": 1, "orientation": "portrait"},
+            timeout=10
+        )
+        response.raise_for_status()
+        data = response.json()
+        results = data.get("results") or []
+
+        if not results:
+            return "placeholder.png"
+
+        image_url = results[0]["urls"]["regular"]
+        img_resp = requests.get(image_url, timeout=10, stream=True)
+        img_resp.raise_for_status()
+
+        content_type = img_resp.headers.get("Content-Type", "")
+        if not content_type.startswith("image/"):
+            return "placeholder.png"
+
+        _, ext = os.path.splitext(image_url.split("?")[0])
+        if not ext or len(ext) > 6:
+            ext = ".jpg"
+
+        safe_name = "".join(ch for ch in animal_name if ch.isalnum()) or "animal"
+        filename = f"{safe_name}_{int(time.time())}{ext}"
+        folder = current_app.config.get("UPLOAD_FOLDER")
+        os.makedirs(folder, exist_ok=True)
+        path = os.path.join(folder, filename)
+
+        with open(path, "wb") as f:
+            for chunk in img_resp.iter_content(1024):
+                f.write(chunk)
+
+        return filename
+    except Exception as e:
+        print("Unsplash download error:", e)
+        return "placeholder.png"
 
 @main.route("/")
 def index():
@@ -289,7 +347,16 @@ def add_animal():
         if existing_animal:
             return render_template(
                 "add_animal.html",
-                error=f"Zwierzę '{name}' już istnieje w bazie"
+                error=f"Zwierzę '{name}' już istnieje w bazie",
+                categories=CATEGORIES,
+                weights=WEIGHT_ENUM,
+                sizes=SIZE_ENUM,
+                habitats=HABITAT_ENUM,
+                name=name,
+                category=request.form.get("category"),
+                weight=request.form.get("weight"),
+                size=request.form.get("size"),
+                selected_habitats=request.form.getlist("habitats")
             )
 
         category = request.form["category"]
@@ -301,19 +368,16 @@ def add_animal():
 
         image = request.files.get("image")
 
-        filename = "placeholder.png"
-
-        if image and image.filename != "":
-            if allowed_file(image.filename):
-                filename = secure_filename(image.filename)
-                image.save(
-                    os.path.join(
-                        current_app.config["UPLOAD_FOLDER"],
-                        filename
-                    )
-                )
-
-
+        if image and image.filename:
+            filename = secure_filename(image.filename)
+            image_path = os.path.join(
+                current_app.config["UPLOAD_FOLDER"],
+                filename
+            )
+            image.save(image_path)
+        else:
+            # Nie dodano nowego obrazu - pobierz z unsplash
+            filename = download_animal_image(name)
 
         animal = Animal(
             name=name,
@@ -385,6 +449,8 @@ def edit_animal(animal_id):
             )
             image.save(image_path)
             animal.image_filename = filename
+        else: # Nie dodano obrazka - pobieramy nowy z unsplash
+            animal.image_filename = download_animal_image(animal.name)
 
         db.session.commit()
 
