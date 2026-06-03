@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+import os
 
 db = SQLAlchemy()
 
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 def create_app():
     app = Flask(__name__)
