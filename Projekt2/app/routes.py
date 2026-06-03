@@ -449,8 +449,8 @@ def edit_animal(animal_id):
             )
             image.save(image_path)
             animal.image_filename = filename
-        else: # Nie dodano obrazka - pobieramy nowy z unsplash
-            animal.image_filename = download_animal_image(animal.name)
+        # else: # Nie dodano obrazka - pobieramy nowy z unsplash
+        #     animal.image_filename = download_animal_image(animal.name)
 
         db.session.commit()
 
